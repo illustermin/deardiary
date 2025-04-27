@@ -1,26 +1,57 @@
 import "./App.css";
-import { Route, Routes, Link } from "react-router-dom";
+import { Route, Routes, Link, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import New from "./pages/New";
 import Diary from "./pages/Diary";
 import Notfound from "./pages/Notfound";
+import Button from "./components/Button";
+import Header from "./components/Header";
+
+import { getEmotionImage } from "./util/get-emotion-image";
 
 //1. "/" : 모든 일기를 조회하는 홈페이지
 //2. "/new" : 새로운 일기를 작성하는 new 페이지
 //3. "/diary" : 일기를 상세히 조회하는 다이어리 페이지
 
 function App() {
+  const nav = useNavigate();
+
+  const onClickButton = () => {
+    nav("/new");
+  };
   return (
     <>
-      <div>
-        <Link to={"/"}> Home </Link>
-        <Link to={"/new"}> New </Link>
-        <Link to={"/diary"}> Diary </Link>
-      </div>
+      <Header
+        title={"Header"}
+        leftChild={<Button text={"Left"} />}
+        rightChild={<Button text={"Right"} />}
+      />
+      <Button
+        text={"123"}
+        type={"DEFAULT"}
+        onClick={() => {
+          console.log("버튼 클릭");
+        }}
+      />
+      <Button
+        text={"123"}
+        type={"POSITIVE"}
+        onClick={() => {
+          console.log("버튼 클릭");
+        }}
+      />
+      <Button
+        text={"123"}
+        type={"NEGATIVE"}
+        onClick={() => {
+          console.log("버튼 클릭");
+        }}
+      />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/new" element={<New />} />
-        <Route path="/diary" element={<Diary />} />
+        <Route path="/diary/:id" element={<Diary />} />
         <Route path="*" element={<Notfound />} />
       </Routes>
     </>
