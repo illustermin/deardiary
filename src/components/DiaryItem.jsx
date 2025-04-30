@@ -12,12 +12,12 @@ const DiaryItem = ({ id, emotionId, createdDate, content }) => {
       <div onClick={() => nav(`/diary/${id}`)} className={`img_section img_section_${emotionId}`}>
         <img src={getEmotionImage(emotionId)} />
       </div>
-      <div className="info_section">
+      <div className="info_section" onClick={() => nav(`/diary/${id}`)}>
         <div className="created_date">{new Date(createdDate).toLocaleDateString()}</div>
         <div className="content">{content} </div>
       </div>
       <div className="button_section">
-        <Button text={"수정하기"} />
+        <Button onClick={()=> nav(`/edit/${id}`)} text={"수정하기"} />
       </div>
     </div>
   );
